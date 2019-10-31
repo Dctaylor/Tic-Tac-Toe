@@ -9,15 +9,12 @@ def printGameBoard(board):
 def playerTurn(board, player, name):
     print("Player ", name, " please input the coordinates of your move, in the format Row Column (Example: 0 1)")
     x, y = [int(x) for x in input().split()]
-    while True:
-        if board[x][y] != "-" or x > 2 or y > 2:
-            print("Invalid location, please try again")
-            x, y = [int(x) for x in input().split()]
-            continue
-        else:
-            board[x][y] = player
-            printGameBoard(board)
-            break
+    while board[x][y] != "-" or x > 2 or y > 2:
+        print("Invalid location, please try again")
+        x, y = [int(x) for x in input().split()]
+
+    board[x][y] = player
+    printGameBoard(board)
     return checkVictory(board,player,x,y)
 
 def checkVictory(board, player, x, y):
@@ -45,17 +42,14 @@ def playTicTacToe():
     playerOne = input()
 
     #Check for valid input
-    while True:
-        if playerOne != "X" and playerOne != "O":
-            print("Invalid input, Player 1, please select X or O.")
-            playerOne = input()
-            continue
-        else:
-            if(playerOne == "X"):
-                playerTwo = "O"
-            else:
-                playerTwo = "X"
-            break
+    while playerOne != "X" and playerOne != "O":
+        print("Invalid input, Player 1, please select X or O.")
+        playerOne = input()
+        
+    if(playerOne == "X"):
+        playerTwo = "O"
+    else:
+        playerTwo = "X"
         
     #Create the initial game board
     gameBoard = [["-","-","-"],["-","-","-"],["-","-","-"]]
